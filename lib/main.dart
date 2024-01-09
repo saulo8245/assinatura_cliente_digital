@@ -22,26 +22,44 @@ class SignaturePad extends StatefulWidget {
 }
 
 class _SignaturePadState extends State<SignaturePad> {
-  //Caneta
+  // Caneta
   final SignatureController _controller = SignatureController(
-    penStrokeWidth: 5,
+    penStrokeWidth: 3,
     penColor: Colors.black,
     exportBackgroundColor: Colors.white,
   );
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    //Ocupar 60% da tela em altura
+    double targetHeight = screenHeight * 0.6;
+    //Ocupar 95% da tela largura
+    double targetWidth = screenWidth * 0.95;
+    //Coloquei em % para se ficar responsivo em qualquer aparelho celular.
+    //E tambem ao usar o celular de forma horizontal ele ja fica responsivo
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Assine Aqui'),
       ),
       body: Column(
         children: [
-          Expanded(
+          Container(
+            height: targetHeight,
+            width: targetWidth,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black, // Cor da borda
+                width: 2.0, // Largura da borda
+              ),
+            ),
             child: Signature(
               controller: _controller,
-              height: 300,
               backgroundColor: Colors.white,
+              height: targetHeight,
+              width: targetWidth,
             ),
           ),
           Padding(
